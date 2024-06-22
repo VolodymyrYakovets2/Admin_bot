@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Login Page
+{% endblock %}
+
+{% block content %}
+   
+    <form method = "post">
+        <input type="text" name= "name" placeholder= "Задайте ім'я!">
+        <input type="text" name= "password" placeholder= "Задайте пароль!">
+        <button type="submit">Надіслати</button>
+    </form>
+{% endblock %}

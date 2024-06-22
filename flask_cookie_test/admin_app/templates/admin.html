@@ -1,0 +1,59 @@
+{% extends "base.html" %} 
+
+{% block title %} 
+    Admin Shop 
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block content %}
+    <!-- форма для створення нового продукта в базі даних -->
+    <form class="form" method = "post" enctype= "multipart/form-data">
+        <input type = "text" name = "name" placeholder = "Введіть ім'я: ">
+        <input type = "text" name = "price" placeholder = "Задайте ціну: ">
+        <input type = "text" name = "discount" placeholder = "Задайте знижку: ">
+        <input type = "text" name = "count" placeholder = "Задайте кількість: ">
+        <textarea type = "text" name = "description" placeholder = "Введіть опис: "></textarea>
+        <!--  -->
+        <input type = "file" name = "image" accept = "image/*">
+        <!--  -->
+        <button type = "submit"> Підтвердити </button>
+    </form>
+    <!-- Цикл що виводить всі товари на екран користувача -->
+    {% for product in products %}
+        <div id = "product-{{ product.id }}">
+            <!--  -->
+            <img src="{{ url_for('shop.static', filename = 'images/' + product.name + '.png') }}" alt="{{ product.name }}">
+            <!-- <h5>Change image:</h5> -->
+            <button name = 'change-image' class = 'change-image' id = '{{ product.id }}'>Change image</button>
+            
+            <!--  -->
+            <h2>Product Name: {{ product.name }}</h2>
+            <button class = "change-name" id = "{{ product.id }}">Change Name</button>
+            <!--  -->
+            <h3>Product Price: {{ product.price }}</h3>
+            <button class = "change-price" id = "{{ product.id }}">Change Price</button>
+            <!--  -->
+            <h4>Product Discount: {{ product.discount }}</h4>
+            <button class = "change-discount" id = "{{ product.id }}">Change Discount</button>
+            <!--  -->
+            <p>Product Description: {{ product.description }}</p>
+            <button class = "change-description" id = "{{ product.id }}">Change Description</button>
+            <!--  -->
+            <form method="post" class = 'form'>
+                <button class = "del-product" id = "del-{{ product.id }}" name= "del" value= "{{ product.id }}">Delete Product</button>
+            </form>
+            
+        </div>
+    {% endfor %}
+    <!--  -->
+    <div style= "display: none;" class = 'modal-window'>
+        <form method= "post" enctype= "multipart/form-data" class = "modal-form">
+            <input type="file" class = "change-image-input" accept = "image/*" name = "image">
+            <button type="submit" name = "submit_changes" class = "submit-changes">Зберегти зміни</button>
+        </form>
+    </div>
+    <script src = "{{ url_for('admin.static', filename = 'js/editImage.js') }}"></script>
+{% endblock %}

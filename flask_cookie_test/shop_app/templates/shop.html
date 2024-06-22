@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Shop
+{% endblock %}
+
+
+{% block content %} 
+    {% for product in products %}
+        <h1>Назва - {{ product.name }}</h1>
+        <p>Опис - {{ product.description }}</p>
+        <p>Кількість - {{ product.count }}</p>
+        <p>ціна - {{ product.price }}</p>
+        <button class = "buy" id = "{{ product.id }}">Купити {{ product.id }}</button>
+        <hr>
+    {% endfor %}
+    <script defer src = "{{ url_for('shop.static', filename = 'js/set_cookies.js') }}"> </script>
+{% endblock %}

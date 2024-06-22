@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Registration
+{% endblock %}
+
+{% block content %}
+    {% if is_registered %}
+        <h1>Ви вже зареєстровані</h1>
+        <a href="/login/">Перейти на сторінку авторизації</a>
+    {% else %}
+        <h1>Ви не зареєстрований користувач. Зареєструйтесь будь ласка: </h1>
+        <form method = "post">
+            <input type="text" name = "name" placeholder = "Enter your name">
+            <input type="text" name = "password" placeholder = "Enter your password">
+            <button class = "registration-button" type = "submit">Зберегти</button>
+        </form>
+    {% endif %}
+{% endblock %}
